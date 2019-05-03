@@ -16,35 +16,36 @@ int main(int argc, char **argv)
   char *filename;
   if (argc == 1) //if there is only one argument dr = "."
   {
-    filename = argv[1];
-
-  } else if (argc == 2)
-  {
     filename = ".";
+
+  } else if (argc == 2)  
+  {
+    filename = argv[1];
   } else
   {
     fprintf(stderr, "not working.");
     return 1;
   }
   
-
   for (i = 1; i < argc; i++) {
       printf("   %s\n", argv[i]);
   }
 
-  //size
-  struct stat sb;
-  if (stat(filename, &sb) != 1)
-  {
-    print("%s is %10lld\n", filename, sb.st_size);
-  }
+  printf("is %s passing?\n", filename);
+
+  // struct stat sb;
+  // if (stat(filename, &sb) != 1)
+  // {
+  //   printf("%s is %10ld\n", filename, sb.st_size);
+  // }
 
   // Open directory
   DIR *dr = opendir(filename); //opendir returns a pointer of DIR type
   //open dir opens path in (), the period means current directory
   struct dirent *entry; //pointer for directory entry
-
-
+  //size
+  struct stat sb;
+  
   if (dr == NULL) //return null if cant open
   {
     printf("dir open failed");
@@ -59,3 +60,9 @@ int main(int argc, char **argv)
   closedir(dr);
   return 0;
 }
+
+  // while((entry = readdir(dr)) != NULL)
+  //   if (stat(filename, &sb) != 1)
+  //   {
+  //     printf("%s is %10ld\n", filename, sb.st_size);      
+  //   }
