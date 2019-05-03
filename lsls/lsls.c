@@ -14,21 +14,15 @@ int main(int argc, char **argv)
   // Parse command line
 
   // printf("There are %d command line argument(s):\n", argc);
-  char *file;
 
   int i;
-  if (argc == 1) //if there is only one argument dr = "."
-  {
-    file = ".";
-    return 0;
-  }
 
-  for (i = 1; i < argc; i++) {
+  for (i = 0; i < argc; i++) {
       printf("   %s\n", argv[i]);
   }
 
   // Open directory
-  DIR *dr = opendir(file); //opendir returns a pointer of DIR type
+  DIR *dr = opendir("."); //opendir returns a pointer of DIR type
   //open dir opens path in (), the period means current directory
   struct dirent *entry; //pointer for directory entry
 
