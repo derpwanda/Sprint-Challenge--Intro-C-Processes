@@ -3,6 +3,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 
 /**
  * Main
@@ -18,7 +19,8 @@ int main(int argc, char **argv)
   {
     filename = ".";
 
-  } else if (argc == 2)  
+  } else if (argc == 2)
+    
   {
     filename = argv[1];
   } else
@@ -31,7 +33,7 @@ int main(int argc, char **argv)
       printf("   %s\n", argv[i]);
   }
 
-  printf("is %s passing?\n", filename);
+  // printf("is %s passing?\n", filename);
 
   // struct stat sb;
   // if (stat(filename, &sb) != 1)
@@ -45,7 +47,7 @@ int main(int argc, char **argv)
   struct dirent *entry; //pointer for directory entry
   //size
   struct stat sb;
-  
+
   if (dr == NULL) //return null if cant open
   {
     printf("dir open failed");
@@ -53,16 +55,14 @@ int main(int argc, char **argv)
   }
   // Repeatly read and print entries
   while((entry = readdir(dr)) != NULL)
-    printf("%s\n", entry -> d_name); 
+  {
+    stat(entry->d_name, &sb);
+    printf("%s  %10ld\n", entry->d_name, sb.st_size); 
     // d_name is built into the dirent struct
+
+  }
 
   // Close directory
   closedir(dr);
   return 0;
 }
-
-  // while((entry = readdir(dr)) != NULL)
-  //   if (stat(filename, &sb) != 1)
-  //   {
-  //     printf("%s is %10ld\n", filename, sb.st_size);      
-  //   }
