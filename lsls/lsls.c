@@ -57,7 +57,7 @@ int main(int argc, char **argv)
   while((entry = readdir(dr)) != NULL)
   {
     stat(entry->d_name, &sb);
-    printf("%s  %10ld\n", entry->d_name, sb.st_size); 
+    printf("%10ld   %s\n", sb.st_size, entry->d_name); 
     // d_name is built into the dirent struct
 
   }
