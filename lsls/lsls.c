@@ -12,17 +12,35 @@ int main(int argc, char **argv)
 //argc is the count of cmdline arguments
 {
   // Parse command line
-
-  // printf("There are %d command line argument(s):\n", argc);
-
   int i;
+  char *filename;
+  if (argc == 1) //if there is only one argument dr = "."
+  {
+    filename = argv[1];
 
-  for (i = 0; i < argc; i++) {
+  } else if (argc == 2)
+  {
+    filename = ".";
+  } else
+  {
+    fprintf(stderr, "not working.");
+    return 1;
+  }
+  
+
+  for (i = 1; i < argc; i++) {
       printf("   %s\n", argv[i]);
   }
 
+  //size
+  struct stat sb;
+  if (stat(filename, &sb) != 1)
+  {
+    print("%s is %10lld\n", filename, sb.st_size);
+  }
+
   // Open directory
-  DIR *dr = opendir("."); //opendir returns a pointer of DIR type
+  DIR *dr = opendir(filename); //opendir returns a pointer of DIR type
   //open dir opens path in (), the period means current directory
   struct dirent *entry; //pointer for directory entry
 
